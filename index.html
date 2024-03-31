@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>super api - DOCS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="text-xl sm:text-3xl lg:text-5xl flex items-center text-center justify-center  gap-3 font-bold  mt-10 relative">
+            <img src="./public/php-logo.svg" class="size-10 md:size-12 lg:size-24 back-drop-shadow" alt="logo de php">
+
+            no esta muerto, he venido a revivirlo 😎
+        </h1>
+        <h2 class="text-lg sm:text-xl font-serif text-center"> <code> Api rest con PHP 8.1</code> </h2>
+    </header>
+
+    <section class="w-10/12 mx-auto fade-in mt-10 flex flex-col xl:flex-row flex-wrap gap-10">
+        <!-- Tarjeta -->
+        <div class=" description-endpoint">
+            <a class="underline flex group" href="./api/products">
+                <span class="font-bold text-xl flex">Listar todos los productos</span>
+                <svg class="group-hover:scale-110 group-hover:-translate-y-110 transition" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                    <path d="M7 7h10v10" />
+                    <path d="M7 17 17 7" />
+                </svg>
+            </a>
+            <!-- <code> /api/products.php </code> -->
+            <div class="code-editor mt-3 w-full md:w-max overflow-x-auto">
+                <div class="header">
+                    <span class="title ">javaScript</span>
+
+                </div>
+                <div class="editor-content  text-xs md:text-sm">
+                    <code class="code">
+                        <span class="text-purple-500">const </span>options = {</span></p>
+
+                        <p class="property">
+                            <span class="color-2">page</span><span>:</span>
+                            <span class="color-1">1</span>,
+                        </p>
+
+
+                        <span>}</span>
+                        <p>
+                            <span class="text-purple-500">const</span> products = <span class="text-purple-500">await</span> <span class="text-yellow-300">fetch</span>(<span class="text-orange-400">"httop://localhost:70/learning/super_api/api/products"</span>, <span> options </span>)
+                        </p>
+                    </code>
+                </div>
+            </div>
+            <!-- descripción -->
+            <p class="mt-2">Trae productos de a 10</p>
+        </div>
+
+    </section>
+
+</body>
+
+</html>
