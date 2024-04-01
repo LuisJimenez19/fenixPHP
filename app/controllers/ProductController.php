@@ -1,43 +1,29 @@
 <?php
 
+namespace App\Controllers;
 
-require_once(__DIR__ . "/../models/Product.php");
+use App\Models\Product;
 
 
-
-class ProductController
+class ProductController extends BaseController
 {
 
-    /* Respuesta al cliente */
-    private $response = [
-        "status" => 200,
-        "data" => []
-    ];
-
-
-    /* Unificar las respuestas */
-    private function Response()
-    {
-        header("Content-Type: application/json");
-        http_response_code($this->response["status"]);
-        echo json_encode($this->response);
-    }
 
 
     /* <---GET ALL ---> */
     public  function index()
     {
+
         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
         // echo $page;
         //? Debería usar un método estatico para no tener que insanciar un producto y poder listarlos todos.
         $products = Product::get_all_products($page);
 
-
         $this->response["status"] = 200;
         $this->response["data"] = [
             "products" => $products,
             "page" => intval($page),
-            "quantity" => count($products)
+            "quantity" => $products != null ? count($products) : 0
         ];
         $this->Response();
     }
@@ -48,32 +34,14 @@ class ProductController
      */
     public function store()
     {
-        $bodyData = json_decode(file_get_contents('php://input'), true);
 
-        /* validar información */
-        //? más normalizada está mis nalgas que esa DB
-        /* 
-        * Solo pregunto si tiene minínmo 5 campos que son los obligatorios.
-        * Podría hacer que valide si tiene los campos obligatorios y evaluarlo en este mismo if,
-        * pero de esta forma evito ejecutar el bucle, solo ahorraria una lineas de código. 
-        TODO? Preguntar que sería mejor.
-        
-        */
-        if (count($bodyData) < 5) {
-
-            $this->response["status"] = 400;
-            $this->response["error"] = "Falta información";
-            $this->Response();
-            exit();
-        }
+        //obtiene los datos a través de post
+        $data = $this->request->request->all();
 
         // * Que las claves concuerden con los campos dela db o esto lo debe hacer el model?
-        //print_r(Product::$requiredColumns);
-        //print_r(array_keys($bodyData));
-        //print_r(array_keys($bodyData) == Product::$requiredColumns);
         //? Si no estan los campos requeridos
         foreach (Product::$requiredColumns as $field) {
-            if (!isset($bodyData[$field])) {
+            if (!isset($data[$field])) {
                 $this->response["status"] = 400;
                 $this->response["error"] = "Información incorrecta, verifique la documentación de la api., falta el campo $field";
                 $this->Response();
@@ -81,25 +49,17 @@ class ProductController
             }
         }
 
-        /* Ejecutar la consulta */
-        $product = new Product();
-
-        $result = $product->create_product($bodyData);
+        $result = Product::create_product($data);
 
         if ($result["ok"]) {
-
-            $bodyResponse = $bodyData;
+            $bodyResponse = $data;
             $bodyResponse["id"] = $result["last_id"];
-
             $this->response["status"] = 200;
             $this->response["data"] = $bodyResponse;
             $this->Response();
             exit();
         } else {
-
-
             $error_msg = $result["error_code"] == 1366 || 1406 ? "Información incorrecta, verifique la documentación de la api." : "Ha ocurrido un error inesperado";
-
             $this->response["status"] = $result["error_code"] == 1366 || 1406 ? 400 : 500;
             $this->response["error"] = $error_msg;
             $this->Response();
@@ -115,29 +75,26 @@ class ProductController
 
     public function update()
     {
+
+        //obtiene los datos a través de post
+        $data = $this->request->request->all();
+
         /* Valida el id */
-        if (!isset($_GET["id_product"])) {
+        if (!isset($data["id_product"])) {
             $this->response["status"] = 400;
             $this->response["error"] = "Id invalido";
-            $this->Response();
-        }
-        $bodyData = json_decode(file_get_contents('php://input'), true);
-
-        /* SI manda más campos de los que se permiten */
-        if (count($bodyData) > count(Product::$allColumns)) {
-            $this->response["status"] = 400;
-            $this->response["error"] = "Campos invalidos";
             $this->Response();
         }
 
         //? Con esta lógica toma los campos que envian y los que se permiten y descarta los demás (Si es que se mandan campos que no se permiten)
         $columnsToChange = [];
-        foreach ($bodyData as $key => $value) {
+        foreach ($data as $key => $value) {
             if (in_array($key, Product::$allColumns)) {
-
                 $columnsToChange[$key] = $value;
             }
         }
+
+        echo json_encode($columnsToChange);
 
         if (count($columnsToChange) == 0) {
             $this->response["status"] = 400;
@@ -147,8 +104,9 @@ class ProductController
         }
 
         /* Si ya paso por la súper verificación */
-        $product = new Product();
-        $result = $product->update_product($columnsToChange, $_GET["id_product"]);
+        $result = Product::update_product($columnsToChange, $data["id_product"]);
+
+        echo json_encode($result);
 
         if ($result["ok"]) {
             $this->response["status"] = 204;
@@ -173,9 +131,7 @@ class ProductController
         }
 
         $id_product = $_GET["id_product"];
-        $product = new Product();
-        $result = $product->delete_product($id_product);
-
+        $result = Product::delete_product($id_product);
 
 
         if (!$result["ok"]) {

@@ -1,8 +1,9 @@
 <?php
 
-require_once(__DIR__ . "/Connection.php");
-$db = new Connection();
-class Product extends Connection
+namespace App\Models;
+
+
+class Product extends Model
 {
     /* Los atributos seran los campos de la tabla */
     // * La tabla ya estaba, la pedi a una IA que la hiciera, solo voy hacer la API
@@ -36,7 +37,6 @@ class Product extends Connection
 
     public static function get_all_products($page = 1)
     {
-        global $db;
 
         $qt = 10;
         $offset = ($page - 1) * $qt;
@@ -48,24 +48,21 @@ class Product extends Connection
         No puedo usar el 
         */
         // $result = parent::get_data($query);
-        $result = $db->get_data($query);
+        $result = self::get_data($query);
 
-        // echo json_encode($result);
+        //echo json_encode($result);
         return $result;
     }
 
-    public function create_product(array $data)
+    public static function create_product(array $data)
     {
-        global $db;
 
         $seccion = $data["seccion"];
         $nombre_articulo = $data["nombre_articulo"];
         $fecha = $data["fecha"];
         $pais_de_origen = $data["pais_de_origen"];
         $precio = $data["precio"];
-
         $url_img = isset($data["url_img"]) ? $data["url_img"] : "";
-
 
         /* Crero la query */
         // $query = "INSERT INTO " . self::$name_table . "(seccion, nombre_articulo, fecha, pais_de_origen, precio)  VALUES ('$seccion', '$nombre_articulo', '$fecha', '$pais_de_origen', '$precio'";
@@ -79,7 +76,7 @@ class Product extends Connection
         }
         $sql .= ")";
 
-        $result = $db->insert_data($sql);
+        $result = self::insert_data($sql);
 
         return $result;
     }
@@ -87,9 +84,9 @@ class Product extends Connection
     /**
      * Actualizar
      *  */
-    public function update_product(array $data, string $id)
+    public static function update_product(array $data, string $id)
     {
-        global $db;
+
 
         /*  $seccion = $data["seccion"] ?? null;
         $nombre_articulo = $data["nombre_articulo"] ?? null;
@@ -101,15 +98,18 @@ class Product extends Connection
         $nombre_articulo = isset($data["nombre_articulo"]) ? "'" . $data["nombre_articulo"] . "'" : "nombre_articulo";
         $fecha = isset($data["fecha"]) ? "'" . $data["fecha"] . "'" : "fecha";
         $pais_de_origen = isset($data["pais_de_origen"]) ? "'" . $data["pais_de_origen"] . "'" : "pais_de_origen";
-        $precio = isset($data["precio"]) ? $data["precio"] : "precio";
+        $precio = isset($data["precio"]) ? "'" . $data["precio"] . "'" : "precio";
         $url_img = isset($data["url_img"]) ? "'" . $data["url_img"] . "'" : "url_img";
 
+        $sql = "UPDATE productos SET seccion = IFNULL($seccion, seccion), 
+                              nombre_articulo = IFNULL($nombre_articulo, nombre_articulo), 
+                              fecha = IFNULL($fecha, fecha), 
+                              pais_de_origen = IFNULL($pais_de_origen, pais_de_origen), 
+                              precio = IFNULL($precio, precio), 
+                              url_img = IFNULL($url_img, url_img)  
+        WHERE id = $id";
 
-
-        /* Si es null deja el valor que estaba antes */
-        $sql = "UPDATE productos SET seccion = IFNULL( $seccion, seccion), nombre_articulo = IFNULL( $nombre_articulo, nombre_articulo), fecha = IFNULL( $fecha, fecha), pais_de_origen = IFNULL( $pais_de_origen, pais_de_origen), precio = IFNULL( $precio, precio), url_img = IFNULL( $url_img, url_img)  WHERE id = $id";
-
-        $result = $db->update_data($sql);
+        $result = self::update_data($sql);
 
         return $result;
     }
@@ -121,12 +121,10 @@ class Product extends Connection
      * Eliminar un producto 
      *  
      * */
-    public function delete_product(string $id)
+    public static function delete_product(string $id)
     {
-        global $db;
-
         $sql = "DELETE FROM productos WHERE id = $id";
-        $result = $db->delete_data($sql);
+        $result = self::delete_data($sql);
         return $result;
     }
 }
