@@ -32,7 +32,7 @@ class ProductController
         //? Debería usar un método estatico para no tener que insanciar un producto y poder listarlos todos.
         $products = Product::get_all_products($page);
 
-
+        // echo var_dump($products);
         $this->response["status"] = 200;
         $this->response["data"] = [
             "products" => $products,

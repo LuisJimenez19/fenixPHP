@@ -185,3 +185,12 @@ section.fade-in {
 .color-preview-1 {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+
+
+
+.description-endpoint:hover > .code-editor {
+  transform: scale(1);
+  filter: drop-shadow(10px 10px 200px #0b0b0b6d);
+  transition: all .2s ease-in;
+}

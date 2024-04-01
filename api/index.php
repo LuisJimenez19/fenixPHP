@@ -7,7 +7,9 @@ $productController = new ProductController();
 
 // Enrutador simple
 $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-$uri = str_replace("/fenixPHP/api", "", $uri);
+// $uri = str_replace("/api", "", $uri); // prod
+$uri = str_replace("/fenixPHP/api", "", $uri); // dev
+
 
 
 //? Ahora si quiero saber el verbo http, debería de hacer lo mismo?
@@ -69,10 +71,9 @@ switch ($uri) {
     default:
         // Ruta no encontrada
         http_response_code(404);
-        /*  echo "<h1>404 - Not Found</h1>";
+        echo "<h1>404 - Not Found</h1>";
         echo "$uri <br>";
-        echo $method; */
-        echo "hola";
+        echo $method;
 
 
         break;

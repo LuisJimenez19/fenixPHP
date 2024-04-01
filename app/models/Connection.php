@@ -4,6 +4,11 @@ class Connection
 {
     /* variables para crear la conexión */
     //TODO hay que configurar el servidor para que pueda variables de entorno, e investigar como usarlas.
+    /*    private $DB_HOST = "sql313.infinityfree.com";
+    private $DB_USER = "if0_36279830";
+    private $DB_PASSWORD = "ubU2O7OgNKh58T";
+    private $DB_PORT = 3306;
+    private $DB_NAME = "if0_36279830_shopping_angel"; */
     private $DB_HOST = "localhost";
     private $DB_USER = "root";
     private $DB_PASSWORD = "";
@@ -16,14 +21,14 @@ class Connection
     function __construct()
     {
 
-       /*  $this->DB_HOST = getenv('DB_HOST');
+        /*  $this->DB_HOST = getenv('DB_HOST');
         $this->DB_USER = getenv('DB_USER');
         $this->DB_PASSWORD = getenv('DB_PASSWORD');
         $this->DB_PORT = getenv('DB_PORT');
         $this->DB_NAME = getenv('DB_NAME'); */
         /* almeceno la conexión */
         $this->connection = new mysqli($this->DB_HOST, $this->DB_USER, $this->DB_PASSWORD, $this->DB_NAME, $this->DB_PORT);
-
+        $this->connection->set_charset("utf8");
         if ($this->connection->connect_errno) {
             echo "Fail to connect to the DB";
             die();

@@ -3,4 +3,16 @@ RewriteEngine On
 # Redirigir todas las solicitudes al archivo index.php dentro de la carpeta "api"
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+# dev
+# RewriteRule ^(.*)$ /fenixPHP/api/index.php [L]
 RewriteRule ^(.*)$ /fenixPHP/api/index.php [L]
+
+# RewriteRule ^(.*)$ http://angel19.42web.io/api/ [L]
+
+## production
+# RewriteEngine On
+
+# Redirigir todas las solicitudes al archivo index.php dentro de la carpeta "api"
+## RewriteCond %{REQUEST_FILENAME} !-f
+## RewriteCond %{REQUEST_FILENAME} !-d
+## RewriteRule ^(.*)$ /api/index.php [L]

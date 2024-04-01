@@ -1,63 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>super api - DOCS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/style.css">
-</head>
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1 class="text-xl sm:text-3xl lg:text-5xl flex items-center text-center justify-center  gap-3 font-bold  mt-10 relative">
-            <img src="./public/php-logo.svg" class="size-10 md:size-12 lg:size-24 back-drop-shadow" alt="logo de php">
+      <h1
+        class="text-xl sm:text-3xl lg:text-5xl flex items-center text-center justify-center gap-3 font-bold mt-10 relative"
+      >
+        <img
+          src="./assets/php-logo.svg"
+          class="size-10 md:size-12 lg:size-24 back-drop-shadow"
+          alt="logo de php"
+        />
 
-            no esta muerto, he venido a revivirlo 😎
-        </h1>
-        <h2 class="text-lg sm:text-xl font-serif text-center"> <code> Api rest con PHP 8.1</code> </h2>
+        no esta muerto, he venido a revivirlo 😎
+      </h1>
+      <h2 class="text-lg sm:text-xl font-serif text-center">
+        <code> Api rest con PHP 8.1</code>
+      </h2>
     </header>
 
-    <section class="w-10/12 mx-auto fade-in mt-10 flex flex-col xl:flex-row flex-wrap gap-10">
-        <!-- Tarjeta -->
-        <div class=" description-endpoint">
-            <a class="underline flex group" href="./api/products">
-                <span class="font-bold text-xl flex">Listar todos los productos</span>
-                <svg class="group-hover:scale-110 group-hover:-translate-y-110 transition" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right">
-                    <path d="M7 7h10v10" />
-                    <path d="M7 17 17 7" />
-                </svg>
-            </a>
-            <!-- <code> /api/products.php </code> -->
-            <div class="code-editor mt-3 w-full md:w-max overflow-x-auto">
-                <div class="header">
-                    <span class="title ">javaScript</span>
+    <section
+      class="w-10/12 mx-auto fade-in mt-10 lg:flex flex-col xl:flex-row flex-wrap gap-10 justify-center "
+    >
+      <!-- Tarjeta GET ALL -->
+      <div class="description-endpoint w-full lg:w-auto lg:flex lg:justify-center flex-col lg:items-center ">
+        <a class="underline flex group" href="./api/products">
+          <span class="font-bold text-xl flex">Listar todos los productos</span>
+          <svg
+            class="group-hover:scale-110 group-hover:-translate-y-110 transition"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-arrow-up-right"
+          >
+            <path d="M7 7h10v10" />
+            <path d="M7 17 17 7" />
+          </svg>
+        </a>
+        <!-- <code> /api/products.php </code> -->
+        <div class="code-editor mt-3 w-full md:w-max overflow-x-auto">
+          <div class="header">
+            <span class="title">javaScript</span>
+          </div>
+          <div class="editor-content text-xs md:text-sm">
+            <code class="code">
+              <small class="text-gray-500"> ## La paginación es opcional</small>
+              <p>
+                <span class="text-purple-500">const </span>
+                <span class="text-sky-200">page </span>
+                <span class=""> = </span>
+                <span class=""> 1 </span>
+              </p>
 
-                </div>
-                <div class="editor-content  text-xs md:text-sm">
-                    <code class="code">
-                        <span class="text-purple-500">const </span>options = {</span></p>
-
-                        <p class="property">
-                            <span class="color-2">page</span><span>:</span>
-                            <span class="color-1">1</span>,
-                        </p>
-
-
-                        <span>}</span>
-                        <p>
-                            <span class="text-purple-500">const</span> products = <span class="text-purple-500">await</span> <span class="text-yellow-300">fetch</span>(<span class="text-orange-400">"httop://localhost:70/learning/super_api/api/products"</span>, <span> options </span>)
-                        </p>
-                    </code>
-                </div>
-            </div>
-            <!-- descripción -->
-            <p class="mt-2">Trae productos de a 10</p>
+              <p>
+                <span class="text-purple-500">const</span> products =
+                <span class="text-purple-500">await</span>
+                <span class="text-yellow-300">fetch</span>
+                (<span
+                  class="text-orange-400">`http://angel19.42web.io/api/products?page=${<span class="text-sky-400">page</span>}`)
+              </p>
+            </code>
+          </div>
         </div>
+        <!-- descripción -->
+        <p class="mt-2">Trae productos de a 10</p>
+      </div>
+      <!-- END Tarjeta GET ALL -->
 
+
+      
+      <!-- Tarjeta Tarjeta POST -->
+      <div class="description-endpoint w-full lg:w-auto lg:flex lg:justify-center flex-col lg:items-center ">
+        <p class="flex group">
+          <span class="font-bold text-xl flex">Crear un producto</span>
+        </p>
+        <!-- <code> /api/products.php </code> -->
+        <div class="code-editor mt-3 w-full md:w-max overflow-x-auto">
+          <div class="header">
+            <span class="title">JavaScript</span>
+          </div>
+          <div class="editor-content text-xs md:text-sm">
+            <code class="code">
+              <p>
+                <span class="text-purple-500">const</span> requestOptions = {
+              </p>
+              <p class="property">
+                method: <span class="text-green-300">'POST'</span>,
+              </p>
+              <p class="property">
+                headers: { <span class="text-green-300">'Content-Type'</span>:
+                <span class="text-green-300">'application/json'</span> },
+              </p>
+              <p class="property">body: JSON.stringify({</p>
+              <p class="property">
+                seccion:
+                <span class="text-green-300">'Nombre de la sección'</span>,
+              </p>
+              <p class="property">
+                nombre_articulo:
+                <span class="text-green-300">'Nombre del artículo'</span>,
+              </p>
+              <p class="property">
+                fecha: <span class="text-green-300">'DD/MM/YYYY'</span>,
+              </p>
+              <p class="property">
+                pais_de_origen:
+                <span class="text-green-300">'País de origen'</span>,
+              </p>
+              <p class="property">
+                precio: <span class="text-orange-400">100</span>,
+              </p>
+              <p class="property">
+                url_img: <span class="text-green-300">'URL de la imagen'</span>
+              </p>
+              <p>})</p>
+              <p>};</p>
+              <p>
+                <span class="text-yellow-300">fetch</span>(<span
+                  class="text-orange-400"
+                  >'/api/product'</span
+                >, requestOptions)
+              </p>
+              <p>
+                <span class="text-yellow-300">.then</span>(<span
+                  class="text-sky-400"
+                  >response</span
+                >
+                => <span class="text-orange-400">response</span>.<span
+                  class="text-yellow-400"
+                  >json</span
+                >())
+              </p>
+              <p>
+                <span class="text-yellow-300">.then</span>(<span
+                  class="text-sky-400"
+                  >data</span
+                >
+                => <span class="text-orange-400">console</span>.<span
+                  class="text-yellow-300"
+                  >log</span
+                >(data));
+              </p>
+            </code>
+          </div>
+        </div>
+        <!-- descripción -->
+        <p class="mt-2">
+          Todos los campos son obligatorio menos <code>`url_img`</code>
+        </p>
+      </div>
+      <!--ENDA Tarjeta Tarjeta POST -->
+
+      <!-- Tarjeta UPDATE -->
+      <div class="description-endpoint w-full lg:w-auto lg:flex lg:justify-center flex-col lg:items-center ">
+        <p class="flex group">
+          <span class="font-bold text-xl flex">Actualizar un producto</span>
+        </p>
+        <!-- <code> /api/products.php </code> -->
+        <div class="code-editor mt-3 w-full md:w-max overflow-x-auto">
+          <div class="header">
+            <span class="title">javaScript</span>
+          </div>
+          <div class="editor-content text-xs md:text-sm">
+            <code class="code">
+              <small class="text-gray-500"> ## La paginación es opcional</small>
+              <p>
+                <span class="text-purple-500">const </span>
+                <span class="text-sky-200">id_product </span>
+                <span class=""> = </span>
+                <span class=""> 1 </span>
+              </p>
+
+              <p>
+                <span class="text-purple-500">const</span> url =
+               <span
+                  class="text-orange-400"
+                  >`http://angel19.42web.io/api/product?id_product=${<span class="text-sky-400">page</span>}`
+              </p>
+              
+                <p>
+                  <span class="text-purple-500">const</span> requestOptions = {
+                </p>
+                <p class="property">
+                  method: <span class="text-green-300">'PATCH'</span>,
+                </p>
+                <p class="property">
+                  headers: { <span class="text-green-300">'Content-Type'</span>:
+                  <span class="text-green-300">'application/json'</span> },
+                </p>
+                <p class="property">body: JSON.stringify({</p>
+                <p class="property">
+                  seccion:
+                  <span class="text-green-300">'Nombre de la sección'</span>,
+                </p>
+                <p class="property">
+                  nombre_articulo:
+                  <span class="text-green-300">'Nombre del artículo'</span>,
+                </p>
+                <p class="property">
+                  fecha: <span class="text-green-300">'DD/MM/YYYY'</span>,
+                </p>
+                <p class="property">
+                  pais_de_origen:
+                  <span class="text-green-300">'País de origen'</span>,
+                </p>
+                <p class="property">
+                  precio: <span class="text-orange-400">100</span>,
+                </p>
+                <p class="property">
+                  url_img: <span class="text-green-300">'URL de la imagen'</span>
+                </p>
+                <p>})</p>
+                <p>};</p>
+                <p>
+                  <span class="text-yellow-300">fetch</span>(<span
+                    class="text-orange-400"
+                    >url</span
+                  >, requestOptions)
+                </p>
+                <p>
+                  <span class="text-yellow-300">.then</span>(<span
+                    class="text-sky-400"
+                    >response</span
+                  >
+                  => <span class="text-orange-400">response</span>.<span
+                    class="text-yellow-400"
+                    >json</span
+                  >())
+                </p>
+                <p>
+                  <span class="text-yellow-300">.then</span>(<span
+                    class="text-sky-400"
+                    >data</span
+                  >
+                  => <span class="text-orange-400">console</span>.<span
+                    class="text-yellow-300"
+                    >log</span
+                  >(data));
+                </p>
+              
+            </code>
+          </div>
+        </div>
+        <!-- descripción -->
+        <p class="mt-2">Los campos son opcionales, puede enviar solo los campos que quiere actualizar. </p>
+      </div>
+      <!--END Tarjeta UPDATE -->
+
+      <!-- Tarjeta DELETE -->
+      <div class="description-endpoint w-full lg:w-auto lg:flex lg:justify-center flex-col lg:items-center ">
+        <p class=" flex group" >
+          <span class="font-bold text-xl flex">Eliminar un producto</span>
+         
+        </p>
+     
+        <div class="code-editor mt-3 w-full md:w-max overflow-x-auto">
+          <div class="header">
+            <span class="title">javaScript</span>
+          </div>
+          <div class="editor-content text-xs md:text-sm">
+            <code class="code">
+             
+              <p>
+                <span class="text-purple-500">const </span><span>id_prodcut = </span>
+                <span class="text-orange-300" >20</span>
+              </p>
+              
+
+            
+              <p>
+                <span class="text-purple-500">const</span> products =
+                <span class="text-purple-500">await</span>
+                <span class="text-yellow-300">fetch</span>(<span
+                  class="text-orange-400"
+                  >`http://angel19.42web.io/api/id_product${<span class="text-sky-400" >id_product</span>}`, {
+                    <p class="property">
+                        method: <span class="text-green-300">'DELETE'</span>,
+                      </p>
+                  } </span>)
+              </p>
+            </code>
+          </div>
+        </div>
+        <!-- descripción -->
+        <p class="mt-2">Elimina el producto indicado</p>
+      </div>
+      <!--END Tarjeta DELETE -->
     </section>
 
-</body>
 
+    <footer class="my-12 w-full flex flex-col md:flex-row justify-center px-10" >
+        <div >
+            <p  class="w-max" >Repositorio 
+                <a class="text-sky-500 underline" href="https://github.com/LuisJimenez19/fenixPHP" target="_blank" >Git Hub</a></p>
+            </p>
+        </div>
+        <div class="md:w-11/12 max-w-6xl text-end" >
+            <p class="text-sm" >Creado por 
+                <a class="text-sky-500 underline" href="https://angeljimenez.netlify.app/" target="_blank" >Luis Ángel💓</a></p>
+        </div>
+    </footer>
+  </body>
 </html>
+
